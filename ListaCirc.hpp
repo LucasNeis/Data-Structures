@@ -41,14 +41,47 @@ ListaCirc<T>::ListaCirc() {
 template<typename T>
 ListaCirc<T>::~ListaCirc() {
   delete sentinela;
+  delete tamanho;
 }
 
 template<typename T>
 void ListaCirc<T>::adicionaNoInicio(const T& dado) {
   Elemento<T>* novo = new Elemento<T>(dado, 0);
-  if(novo == 0) {
+  if (novo == 0) {
     throw ExcecaoListaCheia();
   }
   novo->setProximo(sentinela->getProximo());
   sentinela->setProximo(novo);
+  tamanho++;
+}
+
+template<typename T>
+T ListaCirc<T>::retiraDoInicio() {
+  if (listaVazia()) {
+    throw ExcecaoListaVazia();
+  }
+  T volta;
+  Elemento<T>* sai = sentinela->getProximo();
+  if (novo == 0) {
+    throw ExcecaoListaCheia(0);
+  }
+  sentinela->setProximo(sai->getProximo());
+  volta = sai->getInfo();
+  tamanho--;
+  delete sai;
+  return volta;
+}
+
+template<typename T>
+void ListaCirc<T>::eliminaDoInicio() {
+  if (listaVazia()) {
+    throw ExcecaoListaVazia();
+  }
+  Elemento<T> sai = sentinela->getProximo();
+  if (novo == 0) {
+    throw ExcecaoListaCheia(0);
+  }
+  sentinela->setProximo(sai->getProximo());
+  tamanho--;
+  delete sai;
 }

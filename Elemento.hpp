@@ -13,6 +13,9 @@ class Elemento {
 
 	~Elemento() {
 		delete info;
+		if (_next != 0) {
+			delete _next;
+		}
 	}
 
 	Elemento<T>* getProximo() const {
