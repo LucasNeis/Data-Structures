@@ -45,4 +45,5 @@ ListaCirc<T>::~ListaCirc() {
 template<typename T>
 void ListaCirc<T>::adicionaNoInicio(const T& dado) {
   
+  
 }
