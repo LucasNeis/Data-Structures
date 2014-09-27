@@ -33,7 +33,8 @@ class ListaCirc {
 
 template<typename T>
 ListaCirc<T>::ListaCirc() {
-  sentinela = new Elemento<T>();
+  sentinela = new Elemento<T>(0, 0);
+  sentinela->setProximo(sentinela);
   tamanho = 0;
 }
 
@@ -44,6 +45,10 @@ ListaCirc<T>::~ListaCirc() {
 
 template<typename T>
 void ListaCirc<T>::adicionaNoInicio(const T& dado) {
-  
-  
+  Elemento<T>* novo = new Elemento<T>(dado, 0);
+  if(novo == 0) {
+    throw ExcecaoListaCheia();
+  }
+  novo->setProximo(sentinela->getProximo());
+  sentinela->setProximo(novo);
 }
