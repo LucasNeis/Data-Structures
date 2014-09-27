@@ -85,3 +85,38 @@ void ListaCirc<T>::eliminaDoInicio() {
   tamanho--;
   delete sai;
 }
+
+template<typename T>
+void ListaCirc<T>::adicionaNaPosicao(const T& dado, int pos) {
+  if (listaVazia()) {
+    throw ExcecaoListaVazia();
+  }
+  Elemento<T> anterior = sentinela->getProximo();
+  Elemento<T> novo = new Elemento<T>(dado, 0);
+  if (novo == 0) {
+    throw ExcecaoListaCheia(0);
+  }
+  for (int i = 0; i < pos - 1; i++) {
+    anterior = anterior->getProximo();
+  }
+  novo->setProximo(anterior->getProximo());
+  anterior->setProximo(novo);
+  tamanho++;
+}
+
+template<<typename T>
+int ListaCirc<T>::posicao(const T& dado) const {
+  if (listaVazia()) {
+    ExcecaoListaVazia();
+  }
+  int i = 0;
+  Elemento<T>* atual = sentinela->getProximo();
+  while (i < tamanho) {
+    if (igual(dado, atual->getInfo())) {
+      return i;
+    }
+    atual = atual->getProximo();
+    i++;
+  }
+  throw ExcecaoPosicao();
+}
