@@ -104,7 +104,7 @@ void ListaCirc<T>::adicionaNaPosicao(const T& dado, int pos) {
   tamanho++;
 }
 
-template<<typename T>
+template<typename T>
 int ListaCirc<T>::posicao(const T& dado) const {
   if (listaVazia()) {
     ExcecaoListaVazia();
@@ -119,4 +119,39 @@ int ListaCirc<T>::posicao(const T& dado) const {
     i++;
   }
   throw ExcecaoPosicao();
+}
+
+template<typename T>
+T* ListaCirc<T>::posicaoMem(const T& dado) const {
+  if (listaVazia()) {
+    throw ExcecaoListaVazia();
+  }
+  int posicao = posicao(dado);
+  Elemento<T>* atual = sentinela->getProximo();
+  for (int i = 1; i < posicao; i++) {
+  atual = atual->getProximo();
+  }
+  return atual->getInfo();
+}
+
+template<typename T>
+bool ListaCirc<T>::contem(const T& dado) {
+  if (listaVazia()) {
+    throw ExcecaoListaVazia();
+  }
+  Elemento<T>* atual = sentinela->getProximo();
+  int i = 0;
+  while (i < tamanho) {
+    if (igual(dado, atual->getInfo())) {
+      return true;
+    }
+    atual = atual->getProximo();
+    i++;
+  }
+  return false;
+}
+
+template<typename T>
+T ListaCirc<T>::retiraDaPosicao(int pos) {
+  
 }
