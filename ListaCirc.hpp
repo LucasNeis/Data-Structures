@@ -1,14 +1,14 @@
 #ifndef LISTACIRC_HPP_
 #define LISTAcirc_HPP_
 #include "Elemento.hpp"
-
+#include "ListaEnc.hpp"
 template<typename T>
-class ListaCirc {
+class ListaCirc : private ListaEnc<T>{
  private:
   Elemento<T>* sentinela;
   int tamanho;
  public:
-  ListaCirc();
+  ListaCirc() : ListaEnc<T>();
   ~ListaCirc();
   void adicionaNoInicio(const T& dado);
   T retiraDoInicio();
@@ -32,126 +32,107 @@ class ListaCirc {
 };
 
 template<typename T>
-ListaCirc<T>::ListaCirc() {
-  sentinela = new Elemento<T>(0, 0);
-  sentinela->setProximo(sentinela);
-  tamanho = 0;
+ListaCirc<T>::ListaCirc() : ListaEnc<T>() {
+  setCabeca(new Elemento<T>(0 ,0));
+  getCabeca()->setProximo(getCabeca());
 }
 
 template<typename T>
 ListaCirc<T>::~ListaCirc() {
-  delete sentinela;
-  delete tamanho;
+  ListaEnc<T>::~ListaEnc();
 }
 
 template<typename T>
 void ListaCirc<T>::adicionaNoInicio(const T& dado) {
-  Elemento<T>* novo = new Elemento<T>(dado, 0);
-  if (novo == 0) {
-    throw ExcecaoListaCheia();
-  }
-  novo->setProximo(sentinela->getProximo());
-  sentinela->setProximo(novo);
-  tamanho++;
+  
 }
 
 template<typename T>
 T ListaCirc<T>::retiraDoInicio() {
-  if (listaVazia()) {
-    throw ExcecaoListaVazia();
-  }
-  T volta;
-  Elemento<T>* sai = sentinela->getProximo();
-  if (novo == 0) {
-    throw ExcecaoListaCheia(0);
-  }
-  sentinela->setProximo(sai->getProximo());
-  volta = sai->getInfo();
-  tamanho--;
-  delete sai;
-  return volta;
+
 }
 
 template<typename T>
 void ListaCirc<T>::eliminaDoInicio() {
-  if (listaVazia()) {
-    throw ExcecaoListaVazia();
-  }
-  Elemento<T> sai = sentinela->getProximo();
-  if (novo == 0) {
-    throw ExcecaoListaCheia(0);
-  }
-  sentinela->setProximo(sai->getProximo());
-  tamanho--;
-  delete sai;
+
 }
 
 template<typename T>
-void ListaCirc<T>::adicionaNaPosicao(const T& dado, int pos) {
-  if (listaVazia()) {
-    throw ExcecaoListaVazia();
-  }
-  Elemento<T> anterior = sentinela->getProximo();
-  Elemento<T> novo = new Elemento<T>(dado, 0);
-  if (novo == 0) {
-    throw ExcecaoListaCheia(0);
-  }
-  for (int i = 0; i < pos - 1; i++) {
-    anterior = anterior->getProximo();
-  }
-  novo->setProximo(anterior->getProximo());
-  anterior->setProximo(novo);
-  tamanho++;
+void ListaCirc<T>::adicionaNaPosicao(const T& dado, int pos){
+
 }
 
 template<typename T>
 int ListaCirc<T>::posicao(const T& dado) const {
-  if (listaVazia()) {
-    ExcecaoListaVazia();
-  }
-  int i = 0;
-  Elemento<T>* atual = sentinela->getProximo();
-  while (i < tamanho) {
-    if (igual(dado, atual->getInfo())) {
-      return i;
-    }
-    atual = atual->getProximo();
-    i++;
-  }
-  throw ExcecaoPosicao();
+
 }
 
 template<typename T>
 T* ListaCirc<T>::posicaoMem(const T& dado) const {
-  if (listaVazia()) {
-    throw ExcecaoListaVazia();
-  }
-  int posicao = posicao(dado);
-  Elemento<T>* atual = sentinela->getProximo();
-  for (int i = 1; i < posicao; i++) {
-  atual = atual->getProximo();
-  }
-  return atual->getInfo();
+
 }
 
 template<typename T>
 bool ListaCirc<T>::contem(const T& dado) {
-  if (listaVazia()) {
-    throw ExcecaoListaVazia();
-  }
-  Elemento<T>* atual = sentinela->getProximo();
-  int i = 0;
-  while (i < tamanho) {
-    if (igual(dado, atual->getInfo())) {
-      return true;
-    }
-    atual = atual->getProximo();
-    i++;
-  }
-  return false;
+
 }
 
 template<typename T>
 T ListaCirc<T>::retiraDaPosicao(int pos) {
-  
+
+}
+
+template<typename T>
+void ListaCirc<T>::adiciona(const T& dado) {
+
+}
+
+template<typename T>
+T ListaCirc<T>::retira() {
+
+}
+
+template<typename T>
+T ListaCirc<T>::retiraEspecifico(const T& dado) {
+
+}
+
+template<typename T>
+T ListaCirc<T>::mostra(int pos) {
+
+}
+
+template<typename T>
+void ListaCirc<T>::adicionaEmOrdem(const T& data) {
+
+}
+
+template<typename T>
+int ListaCirc<T>::verUltimo() {
+
+}
+
+template<typename T>
+bool ListaCirc<T>::listaVazia() const {
+
+}
+
+template<typename T>
+bool ListaCirc<T>::igual(T dado1, T dado2) {
+
+}
+
+template<typename T>
+bool ListaCirc<T>::maior(T dado1, T dado2) {
+
+}
+
+template<typename T>
+bool ListaCirc<T>::menor(T dado1, T dado2) {
+
+}
+
+template<typename T>
+void ListaCirc<T>::destroiLista() {
+
 }
